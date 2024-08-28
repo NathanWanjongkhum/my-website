@@ -1,19 +1,23 @@
-import styles from "./page.module.scss";
+"use client";
+
+import { useEffect, useState } from "react";
+import FirstVisitOverlay from "./components/FirstVisitOverlay";
 
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.navContainer}>
-        <h1>Links</h1>
-        <nav className={styles.navbar}>
-          <ul>
-            <li>Link 1</li>
-            <li>Link 1</li>
-            <li>Link 1</li>
-            <li>Link 1</li>
-          </ul>
-        </nav>
-      </div>
-    </main>
-  );
+  const [isFirstVisit, setIsFirstVisit] = useState(false);
+
+  useEffect(() => {
+    const hasVisited = localStorage.getItem("hasVisited");
+    // if (!hasVisited) {
+    //   setIsFirstVisit(true);
+    //   localStorage.setItem("hasVisited", "true");
+    // }
+
+    if (true) {
+      setIsFirstVisit(true);
+      localStorage.setItem("hasVisited", "true");
+    }
+  }, []);
+
+  return <main>{isFirstVisit && <FirstVisitOverlay />}</main>;
 }
